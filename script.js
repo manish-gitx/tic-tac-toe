@@ -20,7 +20,6 @@ button.addEventListener("click",(e)=>{
             player1="X";
         }
             player2="0"
-            console.log(player1,player2);
             maketheBoard(board);
             start.style.display='none'
             flag=true;
@@ -33,7 +32,6 @@ button.addEventListener("click",(e)=>{
             player1="0";
         }
             player2="X"
-            console.log(player1,player2);
             maketheBoard(board);
             start.style.display='none'
             flag=true
@@ -54,7 +52,6 @@ function maketheBoard(board){
             board[i][j]='_';
         }
     }
-
 }
 function print(board){
     for(var i = 0; i < 3; i++) {
@@ -74,6 +71,7 @@ function checkCount(count){
     if(count===9){
         console.log("over")
         over.style.display="flex";
+        chance.innerHTML = `<h1>Its a Tie</h1>`;
     }
 }
 function check_the_move(row,col,sym){
@@ -122,19 +120,23 @@ grid.addEventListener("click", (e) => {
                 } else {
                     sym = 'O';
                 }
+                chance.innerHTML = `<h2>player ${turn?'0':'X'} make a move</h3>`;
+               
                 if(check_the_move(row, col, sym) === false) {
                     console.log("Invalid move");
                     chance.innerHTML = `<h2>made a wrong move</h3>`;
                     return;
                 }
                 e.target.innerText = sym;
-                chance.innerHTML = `<h2>player make a move</h3>`;
-                if(didWin(sym)){
-                    chance.innerHTML = `<h1>I won</h1>`;
+                if(didWin(sym)){ 
+                    chance.innerHTML = `<h1>I ${sym} won</h1>`;
                     console.log("YES");
                     over.style.display="flex";
                 }
+               
+               
                 turn = !turn;
+                
             }
         });
 
